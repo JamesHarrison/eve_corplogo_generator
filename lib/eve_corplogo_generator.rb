@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'fastercsv'
 require 'RMagick'
 module Eve
   module CorporateLogo
