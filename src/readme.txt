@@ -19,10 +19,9 @@ the three layers:
 
 For each pixel in composed image:
   final_alpha = 1 - (1 - layer1_alpha) * (1 - layer2_alpha) * (1 - layer3_alpha)
-  final_color = channel_color / new_alpha
+  final_color = image_color / final_alpha
 
 
 ACKNOWLEDGEMENTS:
 EVE Online, EVE and all associated logos and designs are the intellectual
 property of CCP hf.
-
