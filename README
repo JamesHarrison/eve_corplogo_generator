@@ -1,10 +1,21 @@
-== EVE Corplogo Generator
+== EVE Corplogo Generator (CLG)
 
 This is a Rails plugin/generic library for Ruby to generate the corporation logos used in the MMORPG EVE Online.
 
 === Example
 
+Before usage, you need to include the library
 
+  require 'eve_corplogo_generator'
+
+Then you can use the generator.
+
+  Eve::CorporateLogo::Logo.new([437,456,478], [674,677,677], 'output.png') # => Writes the corporation logo for Vanguard Frontiers to output.png
+  Eve::CorporateLogo::Logo.new([437,456,478], [674,677,677]) # => Creates the image
+  Eve::CorporateLogo::Logo.new([437,456,478], [674,677,677]).image.to_blob # => The image data
+  Eve::CorporateLogo::Logo.new([437,456,478], [674,677,677], 'output.png', 'black') # => Writes the logo to output.png with a black background
+  
+The two arrays in the examples above are the shapes and colors of the logo respectively.
 
 === Installing
 
@@ -20,4 +31,6 @@ If you are using an older Rails version, use
 
 Once installed, you can generate documentation using rdoc (cd vendor/plugins/eve_corplogo_generator;rake rdoc).
 
-Copyright (c) 2008 James Harrison, released under the MIT license
+CLG Source Copyright (c) 2008 James Harrison, released under the MIT license.
+Corporation Logo Images rendered by Entity.
+EVE Online, EVE and all associated logos and designs are the intellectual property of CCP hf.

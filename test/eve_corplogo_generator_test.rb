@@ -7,7 +7,7 @@ class EveCorplogoGeneratorTest < Test::Unit::TestCase
     if File.exists?(@f) then 
       File.delete(@f)
     end
-    @logo = Eve::CorporateLogo::Logo.new([437,456,478],[674,677,677],@f,'white')
+    @logo = Eve::CorporateLogo::Logo.new([437,456,478],[674,677,677],@f)
   end
   def test_load
     assert_instance_of Eve::CorporateLogo::Logo, @logo
@@ -16,3 +16,4 @@ class EveCorplogoGeneratorTest < Test::Unit::TestCase
     assert_equal true,File.exists?(@f)
   end
 end
+

@@ -1,1 +1,1 @@
-require 'eve_killmail_parser'
+require 'eve_corplogo_generator'
