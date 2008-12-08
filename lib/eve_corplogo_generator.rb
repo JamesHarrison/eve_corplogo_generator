@@ -14,22 +14,22 @@ module Eve
         @layers = []
         @colors = colors.reverse # Reverse because we're constructing back-first, whereas API provides front-first lists.
         @shapes = shapes.reverse # And shapes too...
-        @shapes.each_with_index{|v,k|@layers.push(Layer.new(v,@colors[k]))} # Build layers
+        @shapes.each_with_index{|v,k|@layers.push(Layer.new(v,@colors[k])) if v > 0} # Build layers
         @image = Magick::Image.new(64,64){self.format='PNG';if fill then self.background_color=fill;end} 
         @layers.each do |l|
           @image = @image.composite(l.image,0,0,Magick::OverCompositeOp)
         end
         # Begin clever stuff to get transparency right.
         @image.view(0,0,64,64) do |v|
-          l1 = @layers[0].image.view(0,0,64,64)
-          l2 = @layers[1].image.view(0,0,64,64)
-          l3 = @layers[2].image.view(0,0,64,64)
+          l1 = @layers[0].image.view(0,0,64,64) if @layers[0]
+          l2 = @layers[1].image.view(0,0,64,64) if @layers[1]
+          l3 = @layers[2].image.view(0,0,64,64) if @layers[2]
           (0..63).each do |x|
             (0..63).each do |y|
               r,g,b,a = v[x][y].red, v[x][y].green, v[x][y].blue, v[x][y].opacity
-              a1 = (Magick::QuantumRange - l1[x][y].opacity) / Magick::QuantumRange
-              a2 = (Magick::QuantumRange - l2[x][y].opacity) / Magick::QuantumRange
-              a3 = (Magick::QuantumRange - l3[x][y].opacity) / Magick::QuantumRange
+              a1 = @layers[0] ? ((Magick::QuantumRange - l1[x][y].opacity) / Magick::QuantumRange) : Magick::QuantumRange
+              a2 = @layers[1] ? ((Magick::QuantumRange - l2[x][y].opacity) / Magick::QuantumRange) : Magick::QuantumRange
+              a3 = @layers[2] ? ((Magick::QuantumRange - l3[x][y].opacity) / Magick::QuantumRange) : Magick::QuantumRange
               a = 1-(a1*a2*a3)
               if a
                 v[x][y].red = (r/a).round

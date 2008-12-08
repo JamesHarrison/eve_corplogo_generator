@@ -25,3 +25,4 @@ For each pixel in composed image:
 ACKNOWLEDGEMENTS:
 EVE Online, EVE and all associated logos and designs are the intellectual
 property of CCP hf.
+
