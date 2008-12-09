@@ -28,7 +28,7 @@ module Eve
           l3 = @layers[2].image.view(0,0,64,64) if @layers[2].image
           (0..63).each do |x|
             (0..63).each do |y|
-              a = ((l1[x][y].opacity rescue 255)*(l2[x][y].opacity rescue 255)*(l3[x][y].opacity rescue 255))/(Magick::QuantumRange^3)
+              a = ((l1[x][y].opacity rescue 255)*(l2[x][y].opacity rescue 255)*(l3[x][y].opacity rescue 255))/(Magick::QuantumRange**3)
               if a > 0
                 v[x][y].red = (v[x][y].red/a).round
                 v[x][y].green = (v[x][y].green/a).round
