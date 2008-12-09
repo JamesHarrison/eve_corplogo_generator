@@ -31,7 +31,7 @@ module Eve
               a1 = defined?(l1) ? l1[x][y].opacity : 255
               a2 = defined?(l2) ? l2[x][y].opacity : 255
               a3 = defined?(l3) ? l3[x][y].opacity : 255
-              a = (a1*a2*a3)/16581375
+              a = (a1*a2*a3)/(Magick::QuantumRange^3)
               if a > 0
                 v[x][y].red = (v[x][y].red/a).round
                 v[x][y].green = (v[x][y].green/a).round
